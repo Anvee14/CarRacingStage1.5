@@ -28,11 +28,29 @@ class Game {
       form = new Form()
       form.display();
     }
+    obstacle1 = createSprite(760,600,50,50)
+    obstacle1.addImage("obstacle1",obstacle1Img)
+    obstacle1.scale = 0.8
+
+    obstacle2 = createSprite(370,200,50,50)
+    obstacle2.addImage("obstacle2",obstacle2Img)
+    obstacle2.scale = 0.8
+
+   
+    
 
     car1 = createSprite(100,200);
+    car1.addImage("car1",car1Img)
+
     car2 = createSprite(300,200);
+    car2.addImage("car2",car2Img)
+
     car3 = createSprite(500,200);
+    car3.addImage("car3",car3Img)
+
     car4 = createSprite(700,200);
+    car4.addImage("car4",car4Img)
+
     cars = [car1, car2, car3, car4];
   }
 
@@ -41,14 +59,17 @@ class Game {
 
     Player.getPlayerInfo();
     
+    player.getcarsAtEnd()
     if(allPlayers !== undefined){
-      //var display_position = 100;
       
+      background("yellow")
+     image(trackImg,20,-displayHeight*4+800,displayWidth,displayHeight*4)
+  
       //index of the array
       var index = 0;
 
       //x and y position of the cars
-      var x = 0;
+      var x = 180;
       var y;
 
       for(var plr in allPlayers){
@@ -63,7 +84,10 @@ class Game {
         cars[index-1].y = y;
 
         if (index === player.index){
-          cars[index - 1].shapeColor = "red";
+      //    cars[index - 1].shapeColor = "red";
+          fill("red")
+          ellipse(x,y,100,100)
+          text(player.name,x,y+100)
           camera.position.x = displayWidth/2;
           camera.position.y = cars[index-1].y
         }
@@ -73,12 +97,34 @@ class Game {
       }
 
     }
-
+    
     if(keyIsDown(UP_ARROW) && player.index !== null){
       player.distance +=10
       player.update();
+    //  console.log(player.distance)
     }
+   
+    if(player.distance > 3000){
+      gameOver.visible = true
+      gameState = 2
+      player.rank += 1
+      Player.updatecarsAtEnd(player.rank)
+      console.log(player.rank)
+ //   gameOver.visible=true
 
+    }
     drawSprites();
+    
+
+
   }
+  reset(){
+    console.log("database")
+    textSize(20)
+    fill("black")
+    text("game end",displayWidth/2,displayHeight/2+200)
+    
+  
+    }
+  
 }
