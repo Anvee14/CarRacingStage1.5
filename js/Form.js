@@ -25,6 +25,9 @@ class Form {
     this.reset.mousePressed(()=>{
      game.update(0)
      player.updateCount(0)
+     player.updateCarsAtEnd(0)
+     let playersRef=database.ref('players')
+     playersRef.remove()
     })
     this.button.mousePressed(()=>{
       this.input.hide();

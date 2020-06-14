@@ -10,7 +10,7 @@ class Game {
     })
 
   }
-
+ 
   update(state){
     database.ref('/').update({
       gameState: state
@@ -118,13 +118,13 @@ class Game {
 
 
   }
-  reset(){
+ /* reset(){
     console.log("database")
     textSize(20)
     fill("black")
     text("game end",displayWidth/2,displayHeight/2+200)
     
   
-    }
+    }*/
   
 }
